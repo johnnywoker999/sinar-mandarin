@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>SINAR 中文通 — 產品提案</title>
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SINAR 中文通 · 客戶提案
+   Visual system: Linear dark
+   背景 #08090a / 面板 #0f1011 / 表面 #191a1b
+   文字 #f7f8f8 · #d0d6e0 · #8a8f98 · #62666d
+   品牌 indigo #5e6ad2 · 強調 #7170ff
+   邊框 rgba(255,255,255,.08) / .05
+   字級節奏 48/32/24/20/17/15/13/12  ·  僅用 400 / 510 / 590 三種字重
+   ============================================================ */
+:root{
+  --bg:#08090a;
+  --panel:#0f1011;
+  --surface:#191a1b;
+  --surface-2:#28282c;
+  --text:#f7f8f8;
+  --text-2:#d0d6e0;
+  --muted:#8a8f98;
+  --dim:#62666d;
+  --brand:#5e6ad2;
+  --accent:#7170ff;
+  --accent-hi:#828fff;
+  --green:#10b981;
+  --border:rgba(255,255,255,.08);
+  --border-sub:rgba(255,255,255,.05);
+  --card:rgba(255,255,255,.02);
+  --card-hi:rgba(255,255,255,.045);
+  --rail:250px;
+  --maxw:1140px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:32px}
+body{
+  background:var(--bg);
+  color:var(--text-2);
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+  font-feature-settings:"cv01","ss03";
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-wrap:pretty;
+}
+.mono{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-feature-settings:normal}
+
+/* 背景：極低對比網格 + 單點輝光（不搶內容） */
+.bg-fx{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(circle at 78% -8%, rgba(113,112,255,.10), transparent 46%),
+                   radial-gradient(circle at 8% 108%, rgba(94,106,210,.07), transparent 42%);
+}
+.bg-fx::after{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 20%,transparent 78%);
+  -webkit-mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 20%,transparent 78%);
+}
+
+/* ---------- 左側固定導航（桌面） ---------- */
+.rail{
+  position:fixed;top:0;left:0;bottom:0;width:var(--rail);z-index:40;
+  background:linear-gradient(180deg,rgba(15,16,17,.94),rgba(8,9,10,.94));
+  backdrop-filter:blur(14px);
+  border-right:1px solid var(--border-sub);
+  display:flex;flex-direction:column;padding:26px 18px;
+}
+.brand{display:flex;align-items:center;gap:10px;padding:0 8px 20px;border-bottom:1px solid var(--border-sub)}
+.brand-mark{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--brand),var(--accent));
+  display:grid;place-items:center;color:#fff;font-size:12px;font-weight:590;letter-spacing:-.02em;flex:none}
+.brand-name{font-size:14px;font-weight:590;color:var(--text);letter-spacing:-.02em;line-height:1.2}
+.brand-sub{font-size:10px;color:var(--dim);letter-spacing:.06em;text-transform:uppercase}
+.rail-nav{margin-top:18px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
+.rail-nav a{
+  display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;
+  font-size:13px;font-weight:510;color:var(--muted);text-decoration:none;
+  border:1px solid transparent;transition:background .16s,color .16s,border-color .16s;
+}
+.rail-nav a:hover{background:var(--card-hi);color:var(--text-2)}
+.rail-nav a.active{background:rgba(94,106,210,.14);border-color:rgba(113,112,255,.30);color:var(--text)}
+.rail-nav .n{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);width:16px;flex:none}
+.rail-nav a.active .n{color:var(--accent-hi)}
+.rail-foot{margin-top:auto;padding:16px 8px 0;border-top:1px solid var(--border-sub);
+  font-size:11px;color:var(--dim);line-height:1.7}
+.rail-foot b{color:var(--muted);font-weight:510}
+
+/* ---------- 內容 ---------- */
+main{position:relative;z-index:1;margin-left:var(--rail)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+section{padding:104px 0;border-top:1px solid var(--border-sub)}
+section:first-of-type{border-top:none}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-hi);
+  padding:4px 10px;border:1px solid rgba(113,112,255,.24);border-radius:9999px;background:rgba(113,112,255,.07)}
+h2{font-size:32px;font-weight:510;color:var(--text);letter-spacing:-.022em;line-height:1.18;margin:18px 0 14px}
+h2 .thin{color:var(--muted);font-weight:400}
+h3{font-size:20px;font-weight:590;color:var(--text);letter-spacing:-.012em;line-height:1.35}
+h4{font-size:15px;font-weight:590;color:var(--text);letter-spacing:-.008em}
+.lede{font-size:18px;line-height:1.65;color:var(--muted);max-width:74ch;letter-spacing:-.01em}
+p{max-width:78ch}
+.hr{height:1px;background:var(--border-sub);margin:44px 0}
+.note{font-size:12.5px;color:var(--dim);line-height:1.6}
+.src{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--dim);letter-spacing:0}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;transition:background .2s,border-color .2s}
+.card:hover{background:var(--card-hi);border-color:rgba(255,255,255,.12)}
+.card-h{font-size:12px;font-weight:510;color:var(--accent-hi);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;font-family:'JetBrains Mono',monospace}
+.kpi{font-size:34px;font-weight:510;color:var(--text);letter-spacing:-.03em;line-height:1.05}
+.kpi-sm{font-size:24px;font-weight:510;color:var(--text);letter-spacing:-.024em;line-height:1.15}
+.kpi-l{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.55}
+
+/* Hero */
+.hero{padding:112px 0 96px;border-top:none}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;margin-bottom:52px}
+.hero h1{font-size:clamp(40px,6.2vw,72px);font-weight:510;color:var(--text);letter-spacing:-.045em;line-height:.98;margin:22px 0 20px}
+.hero h1 span{color:var(--muted)}
+.hero-sub{font-size:19px;line-height:1.62;color:var(--muted);max-width:60ch}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-sub);
+  border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:52px}
+.hero-stats .st{background:var(--panel);padding:24px 22px}
+.st-n{font-size:30px;font-weight:510;color:var(--text);letter-spacing:-.028em;line-height:1}
+.st-n em{font-style:normal;font-size:15px;color:var(--accent-hi);font-weight:510;margin-left:2px}
+.st-l{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.5}
+
+/* 表格 */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-weight:510;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  padding:0 14px 12px;border-bottom:1px solid var(--border)}
+td{padding:15px 14px;border-bottom:1px solid var(--border-sub);color:var(--text-2);vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:none}
+td b,th b{color:var(--text);font-weight:510}
+.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 10px 8px;overflow-x:auto}
+.tbl-wrap table{min-width:640px}
+.pill{display:inline-block;font-size:11.5px;font-weight:510;color:var(--text-2);padding:3px 10px;
+  border:1px solid var(--border);border-radius:9999px;white-space:nowrap}
+.pill.b{color:var(--accent-hi);border-color:rgba(113,112,255,.32);background:rgba(113,112,255,.08)}
+.pill.g{color:var(--green);border-color:rgba(16,185,129,.3);background:rgba(16,185,129,.08)}
+.pill.w{color:#f0b429;border-color:rgba(240,180,41,.28);background:rgba(240,180,41,.07)}
+
+/* 缺口卡（問題 → 後果） */
+.gap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;
+  background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px}
+.gap .arrow{color:var(--dim);font-family:'JetBrains Mono',monospace}
+.gap-dir{font-size:10.5px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
+
+/* 閉環 SVG */
+.loop-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 22px;margin-top:24px}
+.loop-svg{width:100%;max-width:780px;height:auto;display:block;margin:0 auto}
+.loop-svg text{font-family:'Inter',system-ui,sans-serif;font-feature-settings:"cv01","ss03"}
+.loop-mobile{display:none}
+
+/* 業務閉環鏈 */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 0}
+.tab{appearance:none;cursor:pointer;background:var(--card);border:1px solid var(--border);color:var(--muted);
+  font:inherit;font-size:13.5px;font-weight:510;padding:9px 16px;border-radius:8px;transition:.18s}
+.tab:hover{color:var(--text-2);background:var(--card-hi)}
+.tab[aria-selected="true"]{background:rgba(94,106,210,.16);border-color:rgba(113,112,255,.34);color:var(--text)}
+.panel[hidden]{display:none}
+.chain{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 0}
+.step{flex:1 1 168px;min-width:150px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 16px 18px;position:relative}
+.step .sn{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--accent-hi);letter-spacing:.1em}
+.step h4{margin:9px 0 7px;font-size:14.5px}
+.step p{font-size:12.8px;color:var(--muted);line-height:1.55}
+.step::after{content:"";position:absolute;right:-11px;top:50%;width:10px;height:1px;background:var(--border);}
+.step:last-child::after{display:none}
+.loopback{margin-top:0;border:1px dashed rgba(113,112,255,.30);border-top:none;border-radius:0 0 14px 14px;
+  padding:12px 18px;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:12.5px;color:var(--muted);background:linear-gradient(180deg,rgba(113,112,255,.04),transparent)}
+.loopback b{color:var(--accent-hi);font-weight:510}
+.loopback .rt{font-family:'JetBrains Mono',monospace;color:var(--dim)}
+
+/* 定價 */
+.price{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;display:flex;flex-direction:column}
+.pcard.feat{border-color:rgba(113,112,255,.34);background:linear-gradient(180deg,rgba(94,106,210,.12),rgba(255,255,255,.02))}
+.pcard .pv{font-size:26px;font-weight:510;color:var(--text);letter-spacing:-.026em;margin:14px 0 4px;line-height:1.1}
+.pcard .pv small{font-size:12.5px;color:var(--muted);font-weight:400;letter-spacing:0}
+.pcard ul{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:9px}
+.pcard li{font-size:13px;color:var(--muted);padding-left:16px;position:relative;line-height:1.5}
+.pcard li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.pcard li b{color:var(--text-2);font-weight:510}
+
+/* 錨點條 */
+.bars{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.bar-row{display:grid;grid-template-columns:190px 1fr 150px;align-items:center;gap:16px;font-size:13px}
+.bar-track{height:9px;background:rgba(255,255,255,.05);border-radius:9999px;overflow:hidden}
+.bar-fill{height:100%;border-radius:9999px;background:linear-gradient(90deg,rgba(94,106,210,.85),rgba(113,112,255,.9))}
+.bar-fill.mut{background:rgba(255,255,255,.22)}
+.bar-fill.us{background:linear-gradient(90deg,#7170ff,#828fff)}
+.bar-val{text-align:right;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted)}
+.bar-row.hi .bar-lab{color:var(--text);font-weight:510}
+
+/* 路線圖 */
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.phase{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;position:relative;overflow:hidden}
+.phase::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--border)}
+.phase.p1::before{background:linear-gradient(90deg,var(--accent),transparent)}
+.phase.p2::before{background:linear-gradient(90deg,rgba(113,112,255,.55),transparent)}
+.phase.p3::before{background:linear-gradient(90deg,rgba(255,255,255,.22),transparent)}
+.phase .ph-t{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.1em}
+.phase h3{margin:9px 0 6px}
+.phase .mo{font-size:12.5px;color:var(--accent-hi);margin-bottom:14px}
+.phase ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.phase li{font-size:13px;color:var(--muted);line-height:1.5;padding-left:14px;position:relative}
+.phase li::before{content:"";position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--dim)}
+.phase li b{color:var(--text-2);font-weight:510}
+
+/* 護城河 */
+.moat{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:20px}
+.moat .idx{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent-hi);padding-top:2px;flex:none}
+
+/* 矩陣星星 */
+.star{color:var(--accent-hi);letter-spacing:.06em}
+.star.dim{color:var(--dim)}
+.us-row td{background:rgba(94,106,210,.10);color:var(--text)}
+.us-row td:first-child{border-left:2px solid var(--accent)}
+
+/* 風險 */
+.risk{border-left:2px solid rgba(240,180,41,.5);background:var(--card);border-radius:0 10px 10px 0;padding:16px 20px}
+.req{border-left:2px solid rgba(113,112,255,.55);background:var(--card);border-radius:0 10px 10px 0;padding:16px 20px}
+
+/* CTA */
+.cta{background:linear-gradient(180deg,rgba(94,106,210,.16),rgba(255,255,255,.02));
+  border:1px solid rgba(113,112,255,.28);border-radius:18px;padding:40px 38px;margin-top:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#fff;text-decoration:none;
+  font-size:14px;font-weight:510;padding:11px 20px;border-radius:7px;border:1px solid rgba(255,255,255,.10);
+  transition:.18s;cursor:pointer}
+.btn:hover{background:var(--accent)}
+.btn.ghost{background:rgba(255,255,255,.02);color:var(--text-2);border-color:var(--border)}
+.btn.ghost:hover{background:var(--card-hi);color:var(--text)}
+
+/* 底部導航（手機／平板） */
+.mnav{position:fixed;bottom:0;left:0;right:0;z-index:50;display:none;
+  background:rgba(12,13,14,.94);backdrop-filter:blur(16px);border-top:1px solid var(--border)}
+.mnav-track{display:flex;overflow-x:auto;scrollbar-width:none;padding:8px 10px;gap:6px}
+.mnav-track::-webkit-scrollbar{display:none}
+.mnav a{flex:none;font-size:12px;font-weight:510;color:var(--muted);text-decoration:none;
+  padding:7px 12px;border-radius:7px;border:1px solid transparent;white-space:nowrap}
+.mnav a.active{color:var(--text);background:rgba(94,106,210,.18);border-color:rgba(113,112,255,.3)}
+
+/* 進場動畫：只在 JS 可用時才隱藏（否則內容直接顯示，列印／PDF 也安全） */
+html.js .rv{opacity:0;transform:translateY(14px)}
+html.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+
+/* 響應式 */
+@media (max-width:1180px){ .g4{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:1080px){
+  .rail{display:none}
+  main{margin-left:0}
+  .mnav{display:block}
+  body{padding-bottom:66px}
+  .wrap{padding:0 24px}
+  section{padding:76px 0}
+  .hero{padding:88px 0 72px}
+  .g3,.g2{grid-template-columns:1fr}
+  .price{grid-template-columns:1fr}
+  .phases{grid-template-columns:1fr}
+  .gap{grid-template-columns:1fr;gap:10px}
+  .gap .arrow{transform:rotate(90deg)}
+  .hero-stats{grid-template-columns:1fr}
+  .loop-svg{display:none}
+  .loop-mobile{display:block}
+  .step{flex:1 1 100%}
+  .step::after{display:none}
+  .bar-row{grid-template-columns:1fr;gap:6px}
+  .bar-val{text-align:left}
+}
+@media (max-width:620px){
+  .g4{grid-template-columns:1fr}
+  .wrap{padding:0 18px}
+  h2{font-size:26px}
+  .hero h1{font-size:clamp(28px,9vw,40px);letter-spacing:-.03em}
+  .hero-sub{font-size:17px}
+  .cta{padding:28px 22px}
+}
+@media print{
+  .rail,.mnav,.bg-fx{display:none}
+  main{margin-left:0}
+  body{background:#fff;color:#111}
+  section{page-break-inside:avoid}
+  .rv{opacity:1 !important;transform:none !important}
+}
+</style>
+</head>
+<body>
+<div class="bg-fx"></div>
+
+<!-- ================= 側邊導航 ================= -->
+<nav class="rail" aria-label="章節導航">
+  <div class="brand">
+    <div class="brand-mark">S</div>
+    <div>
+      <div class="brand-name">SINAR 中文通</div>
+      <div class="brand-sub">Client Proposal</div>
+    </div>
+  </div>
+  <div class="rail-nav" id="railNav">
+    <a href="#top" class="active"><span class="n">00</span>總覽</a>
+    <a href="#market"><span class="n">01</span>市場機會</a>
+    <a href="#problem"><span class="n">02</span>痛點與缺口</a>
+    <a href="#product"><span class="n">03</span>產品方案</a>
+    <a href="#loop"><span class="n">04</span>運作閉環</a>
+    <a href="#money"><span class="n">05</span>獲利模式</a>
+    <a href="#moat"><span class="n">06</span>競爭壁壘</a>
+    <a href="#roadmap"><span class="n">07</span>推進路線</a>
+    <a href="#risk"><span class="n">08</span>風險與合規</a>
+    <a href="#next"><span class="n">09</span>下一步</a>
+  </div>
+  <div class="rail-foot">
+    <b>提案方</b> 默墨文創 MURMUR<br>
+    2026-09-28 · v1.0<br>
+    資料來源：5 份市場研究報告（259 KB，逐項附出處）
+  </div>
+</nav>
+
+<!-- ================= 手機底部導航 ================= -->
+<nav class="mnav" aria-label="章節導航（行動版）">
+  <div class="mnav-track" id="mNav">
+    <a href="#top" class="active">總覽</a>
+    <a href="#market">市場</a>
+    <a href="#problem">痛點</a>
+    <a href="#product">產品</a>
+    <a href="#loop">運作閉環</a>
+    <a href="#money">獲利模式</a>
+    <a href="#moat">壁壘</a>
+    <a href="#roadmap">路線</a>
+    <a href="#risk">合規</a>
+    <a href="#next">下一步</a>
+  </div>
+</nav>
+
+<main>
+<!-- ================= 00 總覽 ================= -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="eyebrow">產品提案 · 印尼市場</span>
+      <span class="note mono">2026-09-28 · v1.0</span>
+    </div>
+    <h1>SINAR 中文通<br><span>印尼人的中文職涯加速器</span></h1>
+    <p class="hero-sub">把「學中文」從一門課，變成一條收入路徑。<br>
+      以印尼語母語者專屬課程為底層，用 AI 陪練補上「開口練習」，再用求職、跨境電商、旅遊三個真實場景，把學習成果換成 offer、訂單與認證。</p>
+
+    <div class="hero-stats">
+      <div class="st">
+        <div class="st-n">30,000<em>+</em></div>
+        <div class="st-l">印尼每年 HSK 考生，全球第 5 大<br><span class="src">新華社 2026-05</span></div>
+      </div>
+      <div class="st">
+        <div class="st-n">2,743 <em>筆</em></div>
+        <div class="st-l">JobStreet 印尼「中文」職缺<br>多數門檻 HSK 5<br><span class="src">JobStreet ID 2026-09</span></div>
+      </div>
+      <div class="st">
+        <div class="st-n">+43.9<em>%</em></div>
+        <div class="st-l">中文能力薪資溢價<br>（中文筆譯 vs 一般筆譯）<br><span class="src">Indeed Indonesia 2026-07</span></div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+    <div class="grid g3">
+      <div class="card rv">
+        <div class="card-h">需求側</div>
+        <h4>錢已經在市場上，只是找不到人</h4>
+        <p class="note" style="margin-top:10px">中資企業在印尼僱用 5 萬＋本地員工（單一鎳礦園區），車廠、電池廠、高鐵持續擴編；企業普遍反映「會說中文但缺行業知識的人仍難用」。</p>
+      </div>
+      <div class="card rv">
+        <div class="card-h">供給側</div>
+        <h4>79.7% 的人學完，不能上班用</h4>
+        <p class="note" style="margin-top:10px">印尼中文學習者僅 79.7% 停留在中級以下程度；課程結構僵化、師資短缺，與職場需求顯著脫節（學術研究 2025）。</p>
+      </div>
+      <div class="card rv">
+        <div class="card-h">機會</div>
+        <h4>把「學習」直接接到「出口」</h4>
+        <p class="note" style="margin-top:10px">61.9% 的學習者首要動機是職涯晉升，但市場上 20 個主要競品中，電商模組 0 家、求職模組幾乎全空。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 01 市場機會 ================= -->
+<section id="market">
+  <div class="wrap">
+    <span class="eyebrow">01 · 市場機會</span>
+    <h2>三股力量同時發生，<span class="thin">把「學中文」變成剛性需求</span></h2>
+    <p class="lede">這不是一個「語言教育」市場，而是一個「人力與生意」市場。中文只是入口，真正的買單理由是收入。</p>
+
+    <div class="grid g3" style="margin-top:36px">
+      <div class="card rv">
+        <div class="card-h">驅動 1</div>
+        <h3>中資企業落地，缺會中文的本地人</h3>
+        <ul style="list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:9px">
+          <li class="note">中國為印尼第 3 大外資來源，2025 年落實 <b style="color:var(--text)">75 億美元</b></li>
+          <li class="note">BYD 西爪哇廠現僱 5,000 人 → 目標 <b style="color:var(--text)">2 萬人</b></li>
+          <li class="note">CATIB 已派 <b style="color:var(--text)">600 名</b>員工赴中受訓；Whoosh 高鐵 513 名本地員工受中方兩年培訓</li>
+          <li class="note">翻譯／技術員／採購／品管／HR 等 <b style="color:var(--text)">8 類職能</b>明確要求中文</li>
+        </ul>
+      </div>
+      <div class="card rv">
+        <div class="card-h">驅動 2</div>
+        <h3>賣家湧向中國供應鏈，卡在語言</h3>
+        <ul style="list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:9px">
+          <li class="note">印尼電商 GMV <b style="color:var(--text)">577 億美元</b>（2025），直播帶貨為成長主引擎</li>
+          <li class="note">印尼自中國進口 <b style="color:var(--text)">738 億美元</b>，佔總進口 31.4%（2024）</li>
+          <li class="note">1688：<b style="color:var(--text)">73%</b> 定制採購糾紛源於 MOQ 認知落差</li>
+          <li class="note">現行替代方案＝付代購費 1.5–7.5%（月進貨 2,000 萬盾 ≈ 年付 1,200–1,800 萬盾「語言稅」）</li>
+        </ul>
+      </div>
+      <div class="card rv">
+        <div class="card-h">驅動 3</div>
+        <h3>旅遊與留學回暖，供給卻斷層</h3>
+        <ul style="list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:9px">
+          <li class="note">2025 年中國赴印尼 <b style="color:var(--text)">134 萬人次</b>，第 4 大客源國；峇里島 53.7 萬（2026 年 1–5 月已升至第 2）</li>
+          <li class="note">疫情前峇里島 1,381 名華語導遊，<b style="color:var(--text)">1,053 名未換證</b></li>
+          <li class="note">在華印尼留學生 1.5–2 萬人；2026/27 中印尼高教獎學金縮至 20 名全額</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+    <div class="grid g4">
+      <div class="card rv"><div class="kpi-sm">61.9%</div><div class="kpi-l">學習者首要動機是<b style="color:var(--text)">職涯晉升</b></div></div>
+      <div class="card rv"><div class="kpi-sm">+30～50%</div><div class="kpi-l">業界給出的中文能力薪資溢價區間</div></div>
+      <div class="card rv"><div class="kpi-sm">80%</div><div class="kpi-l">印尼受訪者使用電子錢包，QRIS 交易量年增 <b style="color:var(--text)">+163%</b></div></div>
+      <div class="card rv"><div class="kpi-sm">1,877 萬張</div><div class="kpi-l">全國信用卡流通量（≈6.5 張/百人）→ <b style="color:var(--text)">不能只做刷卡付費</b></div></div>
+    </div>
+    <p class="note" style="margin-top:16px">資料來源：BKPM、BPS、Momentum Works、JobStreet ID、Indeed Indonesia、Julianti &amp; Hao (2025)、APJII、Bank Indonesia、ASPI — 完整出處見研究報告 <span class="mono">_research/01–05</span>。</p>
+  </div>
+</section>
+
+<!-- ================= 02 痛點與缺口 ================= -->
+<section id="problem">
+  <div class="wrap">
+    <span class="eyebrow">02 · 痛點與缺口</span>
+    <h2>市場不缺課程，<span class="thin">缺的是「學完能用」的那一段</span></h2>
+    <p class="lede">我們先驗證了一件事，並且推翻了自己的假設：<b style="color:var(--text)">印尼語介面早就不是缺口</b>——Duolingo、HelloChinese、SuperChinese、SuperTest、ChineseSkill 五家都已支援印尼語。真正的缺口在別的地方。</p>
+
+    <div style="display:flex;flex-direction:column;gap:14px;margin-top:34px">
+      <div class="gap rv">
+        <div>
+          <div class="gap-dir">現況</div>
+          <h4 style="margin-top:8px">印尼語只做「介面翻譯」</h4>
+          <p class="note" style="margin-top:8px">主流 App 的印尼語多止於 UI 字串，課程本體仍是英文思維；甚至出現印尼官網混入未翻譯義大利文的機器翻譯痕跡。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div>
+          <div class="gap-dir">後果</div>
+          <h4 style="margin-top:8px">沒人用印尼語解釋「為什麼錯」</h4>
+          <p class="note" style="margin-top:8px">印尼語沒有聲調、沒有量詞系統，學習者最需要的是母語對比教學——這在 20 個競品中完全缺席。</p>
+        </div>
+      </div>
+      <div class="gap rv">
+        <div>
+          <div class="gap-dir">現況</div>
+          <h4 style="margin-top:8px">職缺很多，能力對不上</h4>
+          <p class="note" style="margin-top:8px">2,743 筆中文職缺，但 79.7% 學習者停在「不能上班用」的程度；企業抱怨「會說中文但缺行業知識」。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div>
+          <div class="gap-dir">後果</div>
+          <h4 style="margin-top:8px">學完不知道要幹嘛，完課率與續訂低</h4>
+          <p class="note" style="margin-top:8px">純「職缺媒合」在印尼已被證明行不通（mandareer.com 已停運）——必須綁定培訓與認證才有價值。</p>
+        </div>
+      </div>
+      <div class="gap rv">
+        <div>
+          <div class="gap-dir">現況</div>
+          <h4 style="margin-top:8px">AI、真人、本地支付，從未同時出現</h4>
+          <p class="note" style="margin-top:8px">Cakap 有真人教師與完整本地支付，但沒有 AI 糾音；純 App 陣營有 AI，卻沒有真人與本地支付。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div>
+          <div class="gap-dir">後果</div>
+          <h4 style="margin-top:8px">用戶被迫在「便宜但沒人問」與「有人教但付不起」之間二選一</h4>
+          <p class="note" style="margin-top:8px">同時具備 AI＋真人＋本地支付的競品：<b style="color:var(--text)">0 家</b>。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+    <div class="grid g3">
+      <div class="card rv"><div class="card-h">最高風險項</div><h4>印尼口音中文的語音辨識</h4><p class="note" style="margin-top:10px">目前<b style="color:var(--text)">不存在任何公開基準測試</b>。這是全案最高技術風險，也是我們的第一道護城河——先建語料的人贏。</p></div>
+      <div class="card rv"><div class="card-h">時代背景</div><h4>80% 電子錢包、低階機當道</h4><p class="note" style="margin-top:10px">最差 10% 用戶中位下載僅 5.69 Mbps、5G 僅覆蓋約 5% 人口 → 產品必須<b style="color:var(--text)">離線優先</b>，而非把離線當加分項。</p></div>
+      <div class="card rv"><div class="card-h">合規現實</div><h4>上線前就得先做的功課</h4><p class="note" style="margin-top:10px">印尼 <b style="color:var(--text)">PSE 註冊</b>為上線前置；語音聲紋屬「特定個資」，需 DPIA 與 DPO；AI 處理需符合 2027 年生效的施行細則。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 產品方案 ================= -->
+<section id="product">
+  <div class="wrap">
+    <span class="eyebrow">03 · 產品方案</span>
+    <h2>SINAR 中文通，<span class="thin">一個入口、八個模組、三個出口</span></h2>
+    <p class="lede">底層是給印尼語母語者的系統課程（對標 HSK 1–6、可離線），中層是 24 小時的 AI 陪練，上層直接接上三條變現出口：求職、做生意、旅遊留學。</p>
+
+    <div class="grid g4" style="margin-top:36px">
+      <div class="card rv"><div class="card-h">M0</div><h4>能力測評</h4><p class="note" style="margin-top:8px">3 分鐘測出程度與「距離目標職位還差幾級」，直接顯示該職位的真實薪資區間。</p></div>
+      <div class="card rv"><div class="card-h">M1</div><h4>課程學習</h4><p class="note" style="margin-top:8px">印尼語授課、母語遷移教學法（聲調／量詞／借詞錨點）；每課 3–8 分鐘、可離線下載。</p></div>
+      <div class="card rv"><div class="card-h">M2</div><h4>AI 學習助手</h4><p class="note" style="margin-top:8px">口說陪練、發音評測、印尼語錯因解釋、離線拍照識字與詞典。</p></div>
+      <div class="card rv"><div class="card-h">M3</div><h4>職涯中心</h4><p class="note" style="margin-top:8px">能力對映、中文履歷生成、面試模擬、可驗證電子證書（不做招聘平台）。</p></div>
+      <div class="card rv"><div class="card-h">M4</div><h4>旅遊留學</h4><p class="note" style="margin-top:8px">情境會話包、導遊認證評測、赴中簽證合規提示、獎學金導流。</p></div>
+      <div class="card rv"><div class="card-h">M5</div><h4>商務電商實戰</h4><p class="note" style="margin-top:8px">1688 詢價議價話術庫、供應商 AI 陪練、中文規格與上架模板。</p></div>
+      <div class="card rv"><div class="card-h">M6</div><h4>社群與激勵</h4><p class="note" style="margin-top:8px">每日任務、學習幣、短影音學習流——同時是我們自己的獲客引擎。</p></div>
+      <div class="card rv"><div class="card-h">M7 · M8</div><h4>支付與營運後台</h4><p class="note" style="margin-top:8px">QRIS 優先、四大錢包、可分期；後台管理課程、AI 成本上限與合規審查。</p></div>
+    </div>
+
+    <div class="hr"></div>
+    <h3>先驗證的兩個情境包（付費驗證素材）</h3>
+    <div class="grid g2" style="margin-top:20px">
+      <div class="card rv">
+        <div class="card-h">情境包 A · 對準自費族群</div>
+        <h4>1688 詢價議價 20 句</h4>
+        <p class="note" style="margin-top:10px">以真實商品與對話為教材。學完能直接跟中國供應商問價、要樣品、談 MOQ。<br>
+        <b style="color:var(--text)">為什麼買</b>：省下的代購費就是投報率——代購行情 1.5–7.5%，月進貨 2,000 萬盾的賣家，一年可省 1,200 萬盾以上。</p>
+      </div>
+      <div class="card rv">
+        <div class="card-h">情境包 B · 對準企業預算</div>
+        <h4>工地安全中文 30 句</h4>
+        <p class="note" style="margin-top:10px">高噪音環境的關鍵詞聽辨、安全指令複誦、現場回報句型，完全可離線使用。<br>
+        <b style="color:var(--text)">為什麼買</b>：外籍勞工安全導入與語言障礙緩解屬法規合規要項，且語言理解落差已被學術研究關聯至重大工安事件。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 運作閉環 ================= -->
+<section id="loop">
+  <div class="wrap">
+    <span class="eyebrow">04 · 運作閉環</span>
+    <h2>閉環，才是留存的來源</h2>
+    <p class="lede">一般學習 App 的終點是「上完課」。我們的每個模組都以「完成一件真實的事」收尾，並把結果回饋成下一輪的教材與推薦——學得越多，用得越準。</p>
+
+    <div class="loop-box rv">
+      <div class="card-h" style="text-align:center">核心學習循環</div>
+      <!-- 桌面：環形 -->
+      <svg class="loop-svg" viewBox="0 0 660 640" role="img" aria-label="核心學習閉環圖：測評 → 學習 → AI 練習 → 任務實作 → 認證 → 就業接單，數據回流優化內容">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#7170ff"/>
+          </marker>
+          <linearGradient id="nodebg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#131418"/>
+            <stop offset="1" stop-color="#0c0d0f"/>
+          </linearGradient>
+          <linearGradient id="nodebg-hi" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1a1c3a"/>
+            <stop offset="1" stop-color="#111228"/>
+          </linearGradient>
+        </defs>
+
+        <!-- 環（細圓環貫穿，於節點後方） -->
+        <circle cx="330" cy="320" r="205" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1.5"/>
+        <!-- 四段弧線只畫在節點之間的空隙，箭頭落在空白處 -->
+        <path d="M438.6,146.2 A205,205 0 0 1 528.9,270.4" fill="none" stroke="rgba(113,112,255,.55)" stroke-width="1.6" marker-end="url(#ah)"/>
+        <path d="M529.7,366.1 A205,205 0 0 1 450.5,485.8" fill="none" stroke="rgba(113,112,255,.55)" stroke-width="1.6" marker-end="url(#ah)"/>
+        <path d="M215.4,489.9 A205,205 0 0 1 132.0,373.0" fill="none" stroke="rgba(113,112,255,.55)" stroke-width="1.6" marker-end="url(#ah)"/>
+        <path d="M131.2,270.4 A205,205 0 0 1 224.4,144.3" fill="none" stroke="rgba(113,112,255,.55)" stroke-width="1.6" marker-end="url(#ah)"/>
+
+        <!-- 節點 -->
+        <g>
+          <rect x="242" y="84" width="176" height="62" rx="11" fill="url(#nodebg)" stroke="rgba(255,255,255,0.13)"/>
+          <text x="330" y="110" text-anchor="middle" fill="#f7f8f8" font-size="14.5" font-weight="590">① 能力測評</text>
+          <text x="330" y="130" text-anchor="middle" fill="#8a8f98" font-size="11.5">3 分鐘定出起點與目標</text>
+        </g>
+        <g>
+          <rect x="424" y="289" width="176" height="62" rx="11" fill="url(#nodebg)" stroke="rgba(255,255,255,0.13)"/>
+          <text x="512" y="315" text-anchor="middle" fill="#f7f8f8" font-size="14.5" font-weight="590">② 系統課程</text>
+          <text x="512" y="335" text-anchor="middle" fill="#8a8f98" font-size="11.5">印尼語授課 · 可離線</text>
+        </g>
+        <g>
+          <rect x="424" y="499" width="176" height="62" rx="11" fill="url(#nodebg)" stroke="rgba(255,255,255,0.13)"/>
+          <text x="512" y="525" text-anchor="middle" fill="#f7f8f8" font-size="14.5" font-weight="590">③ AI 口說陪練</text>
+          <text x="512" y="545" text-anchor="middle" fill="#8a8f98" font-size="11.5">聽得懂印尼腔 · 即時糾音</text>
+        </g>
+        <g>
+          <rect x="242" y="499" width="176" height="62" rx="11" fill="url(#nodebg)" stroke="rgba(255,255,255,0.13)"/>
+          <text x="330" y="525" text-anchor="middle" fill="#f7f8f8" font-size="14.5" font-weight="590">④ 場景任務</text>
+          <text x="330" y="545" text-anchor="middle" fill="#8a8f98" font-size="11.5">議價／面試／安全回報</text>
+        </g>
+        <g>
+          <rect x="60" y="499" width="176" height="62" rx="11" fill="url(#nodebg)" stroke="rgba(255,255,255,0.13)"/>
+          <text x="148" y="525" text-anchor="middle" fill="#f7f8f8" font-size="14.5" font-weight="590">⑤ 能力認證</text>
+          <text x="148" y="545" text-anchor="middle" fill="#8a8f98" font-size="11.5">可驗證證書 · HSK 對映</text>
+        </g>
+        <g>
+          <rect x="60" y="289" width="176" height="62" rx="11" fill="url(#nodebg-hi)" stroke="rgba(113,112,255,0.42)"/>
+          <text x="148" y="315" text-anchor="middle" fill="#f7f8f8" font-size="14.5" font-weight="590">⑥ 就業／接單</text>
+          <text x="148" y="335" text-anchor="middle" fill="#8a8f98" font-size="11.5">offer · 訂單 · 帶團</text>
+        </g>
+
+        <!-- 中心 -->
+        <text x="330" y="308" text-anchor="middle" fill="#7170ff" font-size="12" font-weight="510" letter-spacing="2">CLOSED LOOP</text>
+        <text x="330" y="334" text-anchor="middle" fill="#f7f8f8" font-size="16" font-weight="590">學 → 練 → 證 → 賺</text>
+        <text x="330" y="357" text-anchor="middle" fill="#8a8f98" font-size="11.5">結果數據回流，優化教材與推薦</text>
+      </svg>
+
+      <!-- 手機：垂直清單 -->
+      <div class="loop-mobile">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="step"><div class="sn">STEP 01</div><h4>能力測評</h4><p>3 分鐘定出起點、目標職位與還差幾級。</p></div>
+          <div class="step"><div class="sn">STEP 02</div><h4>系統課程</h4><p>印尼語授課、聲調與量詞母語對比、可離線下載。</p></div>
+          <div class="step"><div class="sn">STEP 03</div><h4>AI 口說陪練</h4><p>聽得懂印尼腔中文，用印尼語說明為什麼錯。</p></div>
+          <div class="step"><div class="sn">STEP 04</div><h4>場景任務</h4><p>跟供應商議價、模擬面試、複誦安全指令。</p></div>
+          <div class="step"><div class="sn">STEP 05</div><h4>能力認證</h4><p>可 QR 驗證的電子證書，對應職位能力描述。</p></div>
+          <div class="step"><div class="sn">STEP 06</div><h4>就業／接單</h4><p>拿到 offer、談成訂單、接到中國團。</p></div>
+        </div>
+        <div class="loopback" style="border-radius:12px;border-top:1px dashed rgba(113,112,255,.3);margin-top:12px">
+          <span class="rt">↻</span> <b>結果數據回流</b> → 優化教材排序與推薦
+        </div>
+      </div>
+
+      <p class="note" style="text-align:center;margin-top:20px">每一次「完成任務」的成敗結果（是否談成、是否通過認證、是否拿到面試）都會回饋到推薦系統——這是競品只有「完成課程」所沒有的訊號。</p>
+    </div>
+
+    <h3 style="margin-top:52px">三條業務閉環</h3>
+    <p class="note" style="margin-top:10px">每條閉環都有明確的「誰付錢、為什麼付、怎麼回本」。</p>
+
+    <div class="tabs" role="tablist" aria-label="業務閉環">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="loop-a" id="tab-a">電商賣家閉環</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="loop-b" id="tab-b">企業培訓閉環（B2B）</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="loop-c" id="tab-c">旅遊導遊閉環</button>
+    </div>
+
+    <!-- 電商 -->
+    <div class="panel" id="loop-a" role="tabpanel" aria-labelledby="tab-a">
+      <div class="chain">
+        <div class="step"><div class="sn">01 觸發</div><h4>收到中文訊息</h4><p>WhatsApp 上供應商回覆看不懂，貼進 App 或拍照。</p></div>
+        <div class="step"><div class="sn">02 解析</div><h4>看懂意圖</h4><p>翻譯＋意圖判讀（在報價、要 MOQ、要定金）。</p></div>
+        <div class="step"><div class="sn">03 行動</div><h4>生成回覆</h4><p>三種語氣話術＋拼音＋朗讀，一鍵複製。</p></div>
+        <div class="step"><div class="sn">04 學習</div><h4>補上缺口</h4><p>系統推薦對應課程單元，把實戰需求變成學習動機。</p></div>
+        <div class="step"><div class="sn">05 變現</div><h4>談成生意</h4><p>議價成功、MOQ 降低、樣品到手 → 毛利率上升。</p></div>
+      </div>
+      <div class="loopback"><span class="rt">↻</span> 一週後回訪成敗 → <b>回饋話術庫排序</b>，高勝率話術自動前移</div>
+      <p class="note" style="margin-top:16px"><b style="color:var(--text)">閉環為什麼成立</b>：付費動機＝省下的代購費（1.5–7.5%）與更好的進價。使用者每一次使用都產生真實結果標籤，這是純教材產品拿不到的資料。</p>
+    </div>
+
+    <!-- B2B -->
+    <div class="panel" id="loop-b" role="tabpanel" aria-labelledby="tab-b" hidden>
+      <div class="chain">
+        <div class="step"><div class="sn">01 楔子</div><h4>企業痛點</h4><p>現場安全指令理解落差、翻譯人力不足、工安風險。</p></div>
+        <div class="step"><div class="sn">02 試點</div><h4>50–100 Seat</h4><p>批次匯入員工、指派「工地安全中文」為必修、現場引導開通。</p></div>
+        <div class="step"><div class="sn">03 運行</div><h4>每日 10 分鐘</h4><p>離線可用、班組長帶學、進度自動彙總。</p></div>
+        <div class="step"><div class="sn">04 證明</div><h4>月度報表</h4><p>部門完成率、平均分數、活躍度 → HR 可向上級交代。</p></div>
+        <div class="step"><div class="sn">05 擴編</div><h4>續約與擴點</h4><p>由試點廠擴至其他廠區，轉年度合約。</p></div>
+      </div>
+      <div class="loopback"><span class="rt">↻</span> 企業案例與匿名成效數據 → <b>成為下一家企業的成交素材</b></div>
+      <p class="note" style="margin-top:16px"><b style="color:var(--text)">閉環為什麼成立</b>：安全培訓有法規義務與事故成本撐腰，是最容易取得預算的項目；單一企業 Seat 數 500–1,200 人，客單價遠高於個人訂閱。</p>
+    </div>
+
+    <!-- 旅遊 -->
+    <div class="panel" id="loop-c" role="tabpanel" aria-labelledby="tab-c" hidden>
+      <div class="chain">
+        <div class="step"><div class="sn">01 需求</div><h4>想接中國團</h4><p>英語流利但中文只會招呼語，卡住接單價。</p></div>
+        <div class="step"><div class="sn">02 學習</div><h4>情境會話包</h4><p>景點講解稿、購物與醫療情境、應急話術卡。</p></div>
+        <div class="step"><div class="sn">03 測驗</div><h4>線上評測</h4><p>口說＋聽力＋情境應對，通過即發認證。</p></div>
+        <div class="step"><div class="sn">04 背書</div><h4>可查驗證書</h4><p>QR 驗證頁，旅客與旅行社可查（不誤導為官方證照）。</p></div>
+        <div class="step"><div class="sn">05 收益</div><h4>接單升級</h4><p>接到中國團、提高日費；旺季付費意願最高。</p></div>
+      </div>
+      <div class="loopback"><span class="rt">↻</span> 旅客回饋與帶團情境 → <b>擴充會話包與旅行社 B 端採購</b></div>
+      <p class="note" style="margin-top:16px"><b style="color:var(--text)">閉環為什麼成立</b>：需求已被本地業者驗證（旅遊短期課 4 堂 79.9 萬盾）；供給端因 1,053 名華語導遊未換證而斷層，認證正好補上缺口。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 獲利模式 ================= -->
+<section id="money">
+  <div class="wrap">
+    <span class="eyebrow">05 · 獲利模式</span>
+    <h2>五條收入線，<span class="thin">從低價自學到高客單企業</span></h2>
+    <p class="lede">關鍵設計：<b style="color:var(--text)">不跟純自學 App 比價格</b>（對手印尼年費僅 59,999 盾），而是把價值放在「出口」——能不能拿到 offer、談成生意、接到團。</p>
+
+    <div class="tbl-wrap rv" style="margin-top:32px">
+      <table>
+        <thead>
+          <tr><th>收入線</th><th>對象</th><th>定價</th><th>客戶為什麼付</th><th>毛利結構</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>月訂閱</b><br><span class="pill">自學＋AI</span></td>
+            <td>學生、考生</td>
+            <td><b>3.9 萬–7.9 萬盾</b>／月</td>
+            <td>市場已習慣 5–10 萬盾級小額訂閱，價格進入門檻低</td>
+            <td>高（內容一次做、邊際成本近零）</td>
+          </tr>
+          <tr>
+            <td><b>情境包買斷</b><br><span class="pill b">首發主力</span></td>
+            <td>賣家、現場人員</td>
+            <td><b>4.9 萬–19.9 萬盾</b>／包</td>
+            <td>一次買斷符合印尼偏好；ROI 說得清（省代購費／降事故）</td>
+            <td>高</td>
+          </tr>
+          <tr>
+            <td><b>混合訂閱</b><br><span class="pill">AI＋真人</span></td>
+            <td>認真想達標者</td>
+            <td><b>29.9 萬–59.9 萬盾</b>／月</td>
+            <td>AI 高頻練習＋每月 1–2 次真人校正；落在本地真人課價格之下</td>
+            <td>中高（AI 攤平人力成本）</td>
+          </tr>
+          <tr>
+            <td><b>B2B 企業內訓</b><br><span class="pill g">客單價最高</span></td>
+            <td>中資企業 HR</td>
+            <td><b>5 萬–15 萬盾</b>／人／月<br>＋專案費</td>
+            <td>安全合規義務＋事故成本＋可交付報表；500–1,200 人規模</td>
+            <td>中高（含客製服務成本）</td>
+          </tr>
+          <tr>
+            <td><b>導流分潤</b><br><span class="pill">後期</span></td>
+            <td>留學／旅遊</td>
+            <td>分潤制</td>
+            <td>留學代辦、行程、考照機構的成交分潤</td>
+            <td>高（無庫存成本）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin-top:52px">價格定位：我們站在「便宜」與「有人教」之間</h3>
+    <div class="bars rv" style="margin-top:22px">
+      <div class="bar-row">
+        <div class="bar-lab">HelloChinese（自學 App）</div>
+        <div class="bar-track"><div class="bar-fill mut" style="width:6%"></div></div>
+        <div class="bar-val">59,999 盾／年</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab">SuperChinese（自學 App）</div>
+        <div class="bar-track"><div class="bar-fill mut" style="width:9%"></div></div>
+        <div class="bar-val">8.9 萬盾／月</div>
+      </div>
+      <div class="bar-row hi">
+        <div class="bar-lab">SINAR 自學訂閱</div>
+        <div class="bar-track"><div class="bar-fill us" style="width:8%"></div></div>
+        <div class="bar-val">3.9–7.9 萬／月</div>
+      </div>
+      <div class="bar-row hi">
+        <div class="bar-lab">SINAR 混合方案</div>
+        <div class="bar-track"><div class="bar-fill us" style="width:55%"></div></div>
+        <div class="bar-val">29.9–59.9 萬／月</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab">Cakap（本地真人課）</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+        <div class="bar-val">96.2 萬–105 萬／月</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">以本地真人課價格（12 個月方案約 96.2 萬盾／月）為天花板、自學 App 為地板，混合方案取其間——用 AI 承擔高頻練習、真人只做低頻校正，這是價格能壓在對手之下的原因。</p>
+
+    <div class="hr"></div>
+    <h3>單位經濟：成本線先畫出來，才敢賣低價</h3>
+    <div class="grid g4" style="margin-top:20px">
+      <div class="card rv"><div class="kpi-sm">US$0.01–0.015</div><div class="kpi-l">AI 對話每分鐘成本（三段式語音管線）</div></div>
+      <div class="card rv"><div class="kpi-sm">US$0.6–1.2</div><div class="kpi-l">每名學生每月 60 分鐘的 AI 成本</div></div>
+      <div class="card rv"><div class="kpi-sm">≤ 15%</div><div class="kpi-l">AI 成本佔營收上限（硬性財務閘門）</div></div>
+      <div class="card rv"><div class="kpi-sm">0.6%</div><div class="kpi-l">印尼 QRIS <b style="color:var(--text)">教育類商家</b>手續費</div></div>
+    </div>
+    <p class="note" style="margin-top:16px">成本控管設計：主線走「辨識→語言模型→語音合成」三段式管線（比即時語音 API 便宜 5–10 倍）＋每用戶月度分鐘上限＋課程音檔預先合成。Premium 層才開放低延遲即時對話（每分鐘 US$0.06–0.10）。</p>
+
+    <div class="hr"></div>
+    <h3>分期收入結構</h3>
+    <div class="grid g3" style="margin-top:20px">
+      <div class="card rv">
+        <div class="card-h">第 1 階段 · 驗證期</div>
+        <div class="kpi">B2C 為主</div>
+        <p class="note" style="margin-top:10px">月訂閱＋情境包。目標：付費轉換率 ≥2%、月活 5 萬、MAU 留存 30 日 ≥25%。</p>
+      </div>
+      <div class="card rv">
+        <div class="card-h">第 2 階段 · 變現期</div>
+        <div class="kpi">B2B 起量</div>
+        <p class="note" style="margin-top:10px">企業試點 3 家（300 Seat 起）＋混合方案上線。目標：ARPPU ≥12 萬盾／月。</p>
+      </div>
+      <div class="card rv">
+        <div class="card-h">第 3 階段 · 規模期</div>
+        <div class="kpi">B2B ≥35%</div>
+        <p class="note" style="margin-top:10px">企業客戶 ≥10 家（1,500 Seat）＋導流分潤。目標：MAU ≥15 萬、續訂率 ≥75%。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 06 競爭壁壘 ================= -->
+<section id="moat">
+  <div class="wrap">
+    <span class="eyebrow">06 · 競爭壁壘</span>
+    <h2>五道壁壘，<span class="thin">都不是「做更多課」能追上的</span></h2>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:32px">
+      <div class="moat rv"><div class="idx">01</div><div><h4>印尼語母語遷移教學法</h4><p class="note" style="margin-top:8px">印尼語沒有聲調、沒有量詞系統，我們用聲調最小對比、量詞專項與借詞記憶錨點設計課程，並用印尼語解釋每一個錯誤成因。國際 App 以英文為中心的架構，難以改造到這一層。</p></div></div>
+      <div class="moat rv"><div class="idx">02</div><div><h4>場景出口導向（不是課綱導向）</h4><p class="note" style="margin-top:8px">每個單元以「完成真實任務」收尾；課程與職缺門檻、供應商對話、景點講解直接綁定。20 個主要競品中，電商模組 0 家。</p></div></div>
+      <div class="moat rv"><div class="idx">03</div><div><h4>印尼腔中文語音資產</h4><p class="note" style="margin-top:8px">目前<b style="color:var(--text)">公開不存在</b>印尼口音中文的語音測試集。我們先把語料建起來，就能同時改善體驗與拉開成本差距——這是無法快速複製的資產。</p></div></div>
+      <div class="moat rv"><div class="idx">04</div><div><h4>AI ＋ 真人 ＋ 本地支付三合一</h4><p class="note" style="margin-top:8px">同時具備三者的競品為 0 家。在印尼，能不能用 QRIS 與電子錢包付款、能不能分期，直接決定轉換率。</p></div></div>
+      <div class="moat rv"><div class="idx">05</div><div><h4>內容行銷即分發通路</h4><p class="note" style="margin-top:8px">印尼中文教學創作者是免費替代品，我們把他們變成通路：短影音引流＋課程市場分潤，讓獲客成本隨內容資產累積而下降。</p></div></div>
+    </div>
+
+    <h3 style="margin-top:52px">競品對照（節錄）</h3>
+    <div class="tbl-wrap rv" style="margin-top:20px">
+      <table>
+        <thead>
+          <tr><th>競品</th><th>印尼語介面</th><th>HSK 對應</th><th>AI 糾音</th><th>真人</th><th>求職</th><th>旅遊</th><th>電商</th><th>價格（盾）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Duolingo</td><td class="star">★</td><td class="star dim">✕</td><td class="star dim">○</td><td class="star dim">✕</td><td class="star dim">✕</td><td class="star dim">○</td><td class="star dim">✕</td><td>年 41.9–60 萬</td></tr>
+          <tr><td>HelloChinese</td><td class="star">★</td><td class="star">★</td><td class="star">★</td><td class="star dim">✕</td><td class="star dim">✕</td><td class="star dim">○</td><td class="star dim">✕</td><td>年 5.9 萬</td></tr>
+          <tr><td>SuperChinese</td><td class="star">★</td><td class="star">★</td><td class="star">★</td><td class="star dim">✕</td><td class="star dim">✕</td><td class="star dim">○</td><td class="star dim">✕</td><td>月 8.9 萬</td></tr>
+          <tr><td>Cakap（本地龍頭）</td><td class="star">★</td><td class="star dim">○</td><td class="star dim">✕</td><td class="star">★</td><td class="star dim">○</td><td class="star">★</td><td class="star dim">✕</td><td>月 96.2 萬起</td></tr>
+          <tr><td>Ruangguru</td><td class="star">★</td><td class="star dim">✕</td><td class="star dim">✕</td><td class="star">★</td><td class="star dim">○</td><td class="star dim">✕</td><td class="star dim">✕</td><td>套餐 55 萬起</td></tr>
+          <tr><td>孔子學院／大學中心</td><td class="star">★</td><td class="star">★</td><td class="star dim">✕</td><td class="star">★</td><td class="star dim">○</td><td class="star dim">○</td><td class="star dim">✕</td><td>低價／免費</td></tr>
+          <tr><td>線上家教媒合</td><td class="star">★</td><td class="star dim">○</td><td class="star dim">✕</td><td class="star">★</td><td class="star dim">○</td><td class="star dim">○</td><td class="star dim">✕</td><td>時 7.5–30 萬</td></tr>
+          <tr class="us-row"><td><b>SINAR 中文通</b></td><td class="star">★</td><td class="star">★</td><td class="star">★</td><td class="star">★</td><td class="star">★</td><td class="star">★</td><td class="star">★</td><td><b>3.9 萬起</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:14px"><span class="star">★</span> 具備且為核心 · <span class="star dim">○</span> 部分具備 · <span class="star dim">✕</span> 無。資料擷取自各平台印尼區商店頁與官方定價頁（2026）。</p>
+  </div>
+</section>
+
+<!-- ================= 07 路線圖 ================= -->
+<section id="roadmap">
+  <div class="wrap">
+    <span class="eyebrow">07 · 推進路線</span>
+    <h2>先證明留得住，再證明賺得到，<span class="thin">最後才規模化</span></h2>
+
+    <div class="phases">
+      <div class="phase p1 rv">
+        <div class="ph-t">PHASE 1</div>
+        <h3>驗證</h3>
+        <div class="mo">0–4 個月 · MVP</div>
+        <ul>
+          <li><b>課程</b>：HSK1–2 系統課 60 課＋工地安全包＋1688 詢價包</li>
+          <li><b>AI</b>：口說陪練、發音評測、印尼語錯因解釋、離線 OCR 與詞典</li>
+          <li><b>支付</b>：QRIS＋四大電子錢包＋虛擬帳號</li>
+          <li><b>平台</b>：Android（安裝包 ≤40MB、離線優先）＋ PWA</li>
+          <li><b>合規</b>：PSE 註冊、PDP 合規、語音 DPIA 與 DPO</li>
+          <li><b>技術先驗</b>：自建印尼口音語音測試集（30–50 人）</li>
+        </ul>
+      </div>
+      <div class="phase p2 rv">
+        <div class="ph-t">PHASE 2</div>
+        <h3>變現</h3>
+        <div class="mo">4–10 個月</div>
+        <ul>
+          <li><b>混合方案</b>上線：AI 高頻＋真人低頻校正</li>
+          <li><b>企業後台 v1</b>：批次開帳號、指派課綱、月度報表</li>
+          <li><b>HSK 3–4 備考</b>體系（含口說）＋可驗證電子證書</li>
+          <li><b>導遊認證</b>會話包與產業合作</li>
+          <li><b>支付擴充</b>：3／6／12 期分期、先買後付</li>
+          <li><b>語音資產</b>：自建口音模型微調啟動</li>
+        </ul>
+      </div>
+      <div class="phase p3 rv">
+        <div class="ph-t">PHASE 3</div>
+        <h3>規模</h3>
+        <div class="mo">10–18 個月</div>
+        <ul>
+          <li><b>遊學／留學導流</b>（與中國院校分潤）</li>
+          <li><b>創作者生態</b>：本地 KOL 課程市場分潤</li>
+          <li><b>人才配對</b>＋「中文＋職能」雙證照學程</li>
+          <li><b>跨市場延伸</b>：台灣／新加坡移工中文</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+    <h3>每個階段的驗收線</h3>
+    <div class="grid g3" style="margin-top:20px">
+      <div class="card rv">
+        <div class="card-h">上線首月</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:9px">
+          <li class="note">註冊 <b style="color:var(--text)">10,000</b>＋</li>
+          <li class="note">測評完成率 <b style="color:var(--text)">≥70%</b></li>
+          <li class="note">首課完成率 <b style="color:var(--text)">≥60%</b></li>
+          <li class="note">7 日留存 <b style="color:var(--text)">≥35%</b></li>
+          <li class="note">付費轉換 <b style="color:var(--text)">≥2%</b>（印尼基準僅 1–3%）</li>
+        </ul>
+      </div>
+      <div class="card rv">
+        <div class="card-h">3 個月</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:9px">
+          <li class="note">月活 <b style="color:var(--text)">50,000</b>＋</li>
+          <li class="note">付費轉換 <b style="color:var(--text)">≥4%</b></li>
+          <li class="note">續訂率 <b style="color:var(--text)">≥65%</b></li>
+          <li class="note">情境包累計 <b style="color:var(--text)">3,000 份</b></li>
+          <li class="note">企業試點 <b style="color:var(--text)">≥3 家</b>（300 Seat）</li>
+        </ul>
+      </div>
+      <div class="card rv">
+        <div class="card-h">6 個月</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:9px">
+          <li class="note">月活 <b style="color:var(--text)">150,000</b>＋</li>
+          <li class="note">續訂率 <b style="color:var(--text)">≥75%</b></li>
+          <li class="note">企業客戶 <b style="color:var(--text)">≥10 家</b>（1,500 Seat）</li>
+          <li class="note">B2B 收入占比 <b style="color:var(--text)">≥35%</b></li>
+          <li class="note">口音辨識命中率 <b style="color:var(--text)">≥90%</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 08 風險與合規 ================= -->
+<section id="risk">
+  <div class="wrap">
+    <span class="eyebrow">08 · 風險與合規</span>
+    <h2>先把最重要的風險說清楚，<span class="thin">再談成長</span></h2>
+
+    <div class="grid g2" style="margin-top:32px">
+      <div class="risk rv">
+        <h4>最高技術風險：印尼腔中文語音辨識</h4>
+        <p class="note" style="margin-top:8px">目前無任何公開基準測試。對策：開發前先建 30–50 人測試集；判定改用關鍵詞命中而非全句轉寫；低信心時不報錯、改為提示重說；並保留離線降級路徑。</p>
+      </div>
+      <div class="risk rv">
+        <h4>價格天花板極低</h4>
+        <p class="note" style="margin-top:8px">競品印尼年費僅 59,999 盾（美國區 69.99 美元，價差 20 倍），純自學訂閱無法正面比價。對策：價值放在「出口」，並以情境包買斷＋混合方案＋B2B 三軌並行。</p>
+      </div>
+      <div class="risk rv">
+        <h4>AI 成本失控</h4>
+        <p class="note" style="margin-top:8px">對策：主線用三段式語音管線（便宜 5–10 倍）、每用戶月度分鐘上限、課程音檔預先合成、即時語音僅 Premium 層，並設營收 15% 的成本上限儀表板與告警。</p>
+      </div>
+      <div class="risk rv">
+        <h4>內容與文化紅線</h4>
+        <p class="note" style="margin-top:8px">印尼新刑法已將褻瀆宗教條文由 1 條擴張為 6 條。對策：上線前建立七類紅線審查流程（宗教／族群／政治／主權與地圖／性別議題／賭博／酒精），例句與行銷素材一律走本地化審校。</p>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+    <h3>上線前的三項合規前置（不可延後）</h3>
+    <div class="grid g3" style="margin-top:20px">
+      <div class="req rv">
+        <h4>PSE 註冊</h4>
+        <p class="note" style="margin-top:8px">向印尼數位主管機關註冊為電子系統營運商，是 App 上線的前置條件；未註冊者已被列入管制與封鎖名單。</p>
+      </div>
+      <div class="req rv">
+        <h4>個資法合規（PDP）</h4>
+        <p class="note" style="margin-top:8px">2024 年起全面適用。語音聲紋與兒童資料屬「特定個資」，需完成 DPIA 並指派 DPO；跨境傳輸須走合規路徑；印尼施行細則要求 AI 處理另做影響評估。</p>
+      </div>
+      <div class="req rv">
+        <h4>外資架構選擇</h4>
+        <p class="note" style="margin-top:8px">三條路徑：設本地公司、純數位營運、或與本地已立案機構合作。MVP 建議走純數位＋PSE，B2B 與實體課再升級，並取得印尼律所正式意見。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 09 下一步 ================= -->
+<section id="next" style="border-bottom:none">
+  <div class="wrap">
+    <span class="eyebrow">09 · 下一步</span>
+    <h2>三件事，<span class="thin">決定這個案子能不能成</span></h2>
+
+    <div class="grid g3" style="margin-top:32px">
+      <div class="card rv">
+        <div class="card-h">第一優先</div>
+        <h4>建印尼口音語音測試集</h4>
+        <p class="note" style="margin-top:10px">30–50 人 × 10 句，量測辨識與聲調判定基線。這是全案唯一會「一翻兩瞪眼」的假設。</p>
+        <p class="note" style="margin-top:10px"><span class="pill">預算約 US$2,000–5,000</span></p>
+      </div>
+      <div class="card rv">
+        <div class="card-h">同步進行</div>
+        <h4>合規啟動與架構定案</h4>
+        <p class="note" style="margin-top:10px">啟動 PSE 註冊與 PDP 準備；取得印尼律所對外資教育路徑的正式意見。</p>
+        <p class="note" style="margin-top:10px"><span class="pill">預算約 US$3,000–8,000</span></p>
+      </div>
+      <div class="card rv">
+        <div class="card-h">可立即展示</div>
+        <h4>兩條情境包樣板</h4>
+        <p class="note" style="margin-top:10px">「1688 詢價 20 句」＋「工地安全 30 句」做成可試用的內容樣板，作為第一批付費驗證素材。</p>
+        <p class="note" style="margin-top:10px"><span class="pill">2–3 週可交付</span></p>
+      </div>
+    </div>
+
+    <div class="cta rv">
+      <h3 style="font-size:24px">確認方向後，我們從「驗證」開始，而不是從「開發」開始</h3>
+      <p class="lede" style="margin-top:14px;max-width:66ch">先驗證三件事——印尼口音辨識夠不夠用、用戶願不願意付錢、企業願不願意簽試點——再投入完整開發。這樣可以把最大的風險，放在最便宜的時候解決。</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px">
+        <a class="btn" href="#loop">回看運作閉環</a>
+        <a class="btn ghost" href="#money">回看獲利模式</a>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+    <div style="display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <div>
+        <div class="brand-sub" style="margin-bottom:8px">提案方</div>
+        <div style="color:var(--text);font-weight:510">默墨文創 MURMUR</div>
+        <div class="note" style="margin-top:4px">johnny.scw@gmail.com</div>
+      </div>
+      <div>
+        <div class="brand-sub" style="margin-bottom:8px">資料基礎</div>
+        <div class="note">5 份市場研究報告（259 KB）<br>市場競品／就業／旅遊留學／電商跨境／AI 技術與合規</div>
+      </div>
+      <div>
+        <div class="brand-sub" style="margin-bottom:8px">文件版本</div>
+        <div class="note">產品規劃書 v0.2 · 產品需求文檔 v0.2<br>提案頁 v1.0 · 2026-09-28</div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+(function(){
+  /* 標籤切換 */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(o){
+        o.setAttribute('aria-selected', o === t ? 'true' : 'false');
+        var p = document.getElementById(o.getAttribute('aria-controls'));
+        if(p) p.hidden = (o !== t);
+      });
+    });
+  });
+
+  /* 進場動畫 */
+  var rvs = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:.06});
+    rvs.forEach(function(el, i){ el.style.transitionDelay = (Math.min(i,6)*40)+'ms'; io.observe(el); });
+  } else {
+    rvs.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* 捲動定位（側欄＋手機底欄） */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail-nav a, .mnav a'));
+  var ids = links.map(function(a){ return a.getAttribute('href').slice(1); });
+  var secs = ids.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  function setActive(id){
+    links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#'+id); });
+  }
+  if('IntersectionObserver' in window && secs.length){
+    var io2 = new IntersectionObserver(function(es){
+      var best = null;
+      es.forEach(function(e){ if(e.isIntersecting){ if(!best || e.intersectionRatio > best.intersectionRatio) best = e; } });
+      if(best) setActive(best.target.id);
+    }, {rootMargin:'-25% 0px -60% 0px', threshold:[0,.15,.4,.75]});
+    secs.forEach(function(s){ io2.observe(s); });
+  }
+  links.forEach(function(a){
+    a.addEventListener('click', function(){
+      setActive(a.getAttribute('href').slice(1));
+      var m = document.getElementById('mNav');
+      if(m){ var t = a.closest('.mnav-track'); if(t) t.scrollTo({left: Math.max(0, a.offsetLeft - 60), behavior:'smooth'}); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
